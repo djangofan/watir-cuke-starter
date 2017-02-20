@@ -10,8 +10,7 @@ DataMagic.load 'data_magic.yml'
 require 'page-object/page_factory'
 World(PageObject::PageFactory)
 
-require_relative '../support/pages/google_home_page'
-require_relative '../support/pages/google_result_page'
+require_relative '../support/pages/google_page'
 require_relative '../support/pages/guinea_pig_page'
 
 #$DEBUG = true

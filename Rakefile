@@ -32,7 +32,7 @@ end
 task :run_cucumber do
   FileUtils.mkpath(ENV['OUT_DIR'])
   begin
-    @result = system "parallel_cucumber features/google -o \"--format junit --out #{ENV['OUT_DIR']} --format pretty\" -n 20"
+    @result = system "parallel_cucumber features -o \"--format junit --out #{ENV['OUT_DIR']} --format pretty\" -n 20"
   ensure
     @success &= @result
   end
