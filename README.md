@@ -6,6 +6,10 @@ Another good example:  https://github.com/alisterscott/WatirMelonCucumber/
 
 ### To execute:
 
+First, type :  bundle install
+
+Then execute:
+
 bundle exec rake test_cucumber
 
 bundle exec rake test_rspec
