@@ -45,7 +45,6 @@ task :win_10_chrome do
   ENV['browserName'] = 'chrome'
   ENV['version'] = 'latest'
   ENV['OUT_DIR'] = 'junit_reports/win_10_chrome'
-
   Rake::Task["run_#{ENV['TEST_RUNNER']}"].execute
 end
 

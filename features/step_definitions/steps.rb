@@ -4,6 +4,10 @@ Given /^I go to url '(.*)'$/ do |url|
   @browser.goto(url)
 end
 
+Given(/^I navigate to google$/) do
+  @browser.goto('http://google.com')
+end
+
 When /^I enter '(.*)' in the search box$/ do |item|
   @browser.find_element(:name, 'q').send_keys(item)
 end

@@ -7,12 +7,13 @@ $DEBUG = true
 @sauce_user = ENV['SAUCE_USERNAME']
 @sauce_key = ENV['SAUCE_ACCESS_KEY']
 @grid_url = "http://#{@sauce_user}:#{@sauce_key}@ondemand.saucelabs.com:80/wd/hub"
-puts @grid_url
+puts "GRID URL: #{@grid_url}"
 @tunnel_id = 'lower'
 
 Before do |scenario|
   @name = "#{scenario.feature.name} - #{scenario.name}"
 
+  # i coded caps var like this because RubyMine intelli-sense liked it this way
   @caps = Selenium::WebDriver::Remote::Capabilities.chrome
   @caps[:browserName] = ENV['browserName']
   @caps[:version] =  ENV['version']
@@ -31,7 +32,4 @@ After do |scenario|
   SauceWhisk::Jobs.change_status(session_id, scenario.passed?)
   #@browser.close
 end
-
-
-
 
