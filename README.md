@@ -10,17 +10,19 @@ bundle exec rake test_cucumber
 
 bundle exec rake test_rspec
 
-Var to run sauce in parallel:
+Idea: set var to run sauce in parallel:
 TEST_RUNNER=rspec bundle exec rake
 
 
 ### Notes:
 
-To get these to work, there was a JSON gem conflict.  I think using the Gemfile resolved it maybe?
+Basically, Rake sets up environment variables and then runs the Cucumber execution command.
 
-- gem install sauce
-- gem install sauce-connect
-- gem install sauce_whisk
+We output as junit instead of html I think because the html formatter cant deal with parallel threading?
+
+Uses newer Watir page-object lib.
+
+Also, uses data_magic and watir_model libs.
 
 ### Related Cucumber tools:
 

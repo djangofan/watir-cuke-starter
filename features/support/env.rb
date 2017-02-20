@@ -1,13 +1,10 @@
 require 'rspec'
 require 'watir'
 require 'sauce_whisk'
-
 require 'page-object'
-
 require 'data_magic'
 DataMagic.load 'data_magic.yml'
 
-require 'page-object/page_factory'
 World(PageObject::PageFactory)
 
 require_relative '../support/pages/google_page'
