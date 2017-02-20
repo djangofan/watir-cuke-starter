@@ -8,6 +8,16 @@ class GoogleHomePage
   page_url "http://www.google.com/ncr"
 
   text_field :search, :name => "q"
+  button(:go, name: 'btnK')
+  button(:lucky, name: 'btnI')
+
+  def click_search
+    #self.go_button.click
+  end
+
+  def on_page?
+    self.submit_element.exists?
+  end
 
   def search_for term
     self.search = term
