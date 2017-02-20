@@ -1,3 +1,5 @@
+# features/guinea/comment.feature
+@sauce
 Feature: Guinea Pig comment
 
   Scenario: Verify comment text

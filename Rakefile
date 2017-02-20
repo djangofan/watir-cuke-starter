@@ -20,6 +20,7 @@ task :test_cucumber do
   Rake::MultiTask[:win_10_chrome].invoke
 end
 
+# trouble getting this one to work
 task :run_rspec do
   FileUtils.mkpath(ENV['OUT_DIR'][/^[^\/]+/])
   begin
@@ -32,7 +33,8 @@ end
 task :run_cucumber do
   FileUtils.mkpath(ENV['OUT_DIR'])
   begin
-    @result = system "parallel_cucumber features -o \"--format junit --out #{ENV['OUT_DIR']} --format pretty\" -n 20"
+    # cannot format HTML because of parallel forking
+    @result = system "parallel_cucumber features -o \"--format junit --out #{ENV['OUT_DIR']} --format pretty --tag @sauce\" -n 20"
   ensure
     @success &= @result
   end
@@ -42,7 +44,8 @@ task :win_10_chrome do
   ENV['platform'] = 'WIN10'
   ENV['browserName'] = 'chrome'
   ENV['version'] = 'latest'
-  ENV['OUT_DIR'] = 'junit_reports/win_10_chrome'
+  ENV['OUT_DIR'] = 'reports/win10_chrome'
+  ENV['BUILD_TAG'] = "watir_win10_chrome_#{Time.now.to_i}"
   Rake::Task["run_#{ENV['TEST_RUNNER']}"].execute
 end
 

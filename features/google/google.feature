@@ -1,4 +1,5 @@
-# features/google.feature
+# features/google/google.feature
+@sauce
 Feature: Internet Search
 
   Scenario: Search for Watir

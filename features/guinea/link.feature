@@ -1,3 +1,5 @@
+# features/guinea/link.feature
+@sauce
 Feature: Guinea Pig link
 
   Scenario: Verify Link opens new page

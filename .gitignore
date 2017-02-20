@@ -1,7 +1,7 @@
 features/test.feature
 pkg
 *.log
-junit_reports/
+reports/
 .idea/
 
 

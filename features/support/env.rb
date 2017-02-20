@@ -15,7 +15,10 @@ require_relative '../support/pages/guinea_pig_page'
 
 #$DEBUG = true
 
-Before do |scenario|
+status = SauceWhisk::Sauce.service_status   # Check the status of Sauce Labs' service
+status.inspect
+
+Before('@sauce') do |scenario|
   grid_url = String.new("https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub")
   tunnel_id = 'lower'
   @name = "#{scenario.feature.name} - #{scenario.name}"
@@ -30,14 +33,18 @@ Before do |scenario|
   @caps[:screenResolution] = '1440x900'
   @caps[:maxDuration] = '300'
   @caps[:tags] = ['1440x900','watir']
+  @caps[:build] = ENV['BUILD_TAG'] ||= "Unlabeled Build - #{Time.now.to_i}"
 
   @browser = Watir::Browser.new(:remote, url: grid_url.strip, desired_capabilities: @caps)
 end
 
-After do |scenario|
+After('@sauce') do |scenario|
   session_id = @browser.wd.session_id
-  #SauceWhisk::Jobs.change_status(session_id, scenario.name = @name)
+
+  job = SauceWhisk::Job.new({:id => session_id})
+  job.name = "Finished: #{@name}"
+  SauceWhisk::Jobs.save(job)
+
   SauceWhisk::Jobs.change_status(session_id, scenario.passed?)
-  #@browser.close
 end
 
