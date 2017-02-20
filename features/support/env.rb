@@ -10,6 +10,8 @@ DataMagic.load 'data_magic.yml'
 require 'page-object/page_factory'
 World(PageObject::PageFactory)
 
+require_relative '../support/pages/google_home_page'
+require_relative '../support/pages/google_result_page'
 require_relative '../support/pages/guinea_pig_page'
 
 #$DEBUG = true
@@ -35,6 +37,7 @@ end
 
 After do |scenario|
   session_id = @browser.wd.session_id
+  #SauceWhisk::Jobs.change_status(session_id, scenario.name = @name)
   SauceWhisk::Jobs.change_status(session_id, scenario.passed?)
   #@browser.close
 end

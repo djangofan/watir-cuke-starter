@@ -1,6 +1,8 @@
 # watir-cuke-starter
 
-Inspired by https://github.com/titusfortner/Ruby-Watir-Tests
+Inspired by https://github.com/titusfortner/Ruby-Watir-Tests/
+
+Another good example:  https://github.com/alisterscott/WatirMelonCucumber/
 
 ### To execute:
 
