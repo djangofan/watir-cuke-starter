@@ -24,6 +24,8 @@ Uses newer Watir page-object lib.
 
 Also, uses data_magic and watir_model libs.
 
+Wont run unless you set system environment variables for SAUCE_USERNAME and SAUCE_ACCESS_KEY
+
 ### Related Cucumber tools:
 
 https://github.com/cucumber/cucumber/wiki/Related-tools
