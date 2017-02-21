@@ -1,4 +1,5 @@
 #example proving this works
+# we use sauce-whisk, which does this for us
 require 'httparty'
 
 sauce_user = 'erewrr'
