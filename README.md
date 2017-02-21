@@ -30,6 +30,14 @@ Also, uses data_magic and watir_model libs.
 
 Wont run unless you set system environment variables for SAUCE_USERNAME and SAUCE_ACCESS_KEY
 
+### Examples:
+
+Instead of xpath contains or starts-with, use regex:
+
+browser.div(text: /^foo/)
+browser.div(id: /bar$/)
+browser.a(href: /google.com$/)
+
 ### Related Cucumber tools:
 
 https://github.com/cucumber/cucumber/wiki/Related-tools
