@@ -34,6 +34,9 @@ Test may not run unless you set system environment variables for SAUCE_USERNAME 
 
 https://github.com/cucumber/cucumber/wiki/Related-tools
 
+Another way to go with functionally oriented page objects maybe?
+https://github.com/automation-wizards/ferris/wiki/1-Quick-Start
+
 
 ### I use Sublime as my IDE
 
