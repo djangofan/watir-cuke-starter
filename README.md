@@ -4,6 +4,8 @@ Inspired by https://github.com/titusfortner/Ruby-Watir-Tests/
 
 Another good example:  https://github.com/alisterscott/WatirMelonCucumber/
 
+
+
 ### To execute:
 
 First, type :  bundle install
@@ -26,11 +28,23 @@ We output as junit instead of html I think because the html formatter cant deal 
 
 Uses newer Watir page-object lib.
 
-Also, uses data_magic and watir_model libs.
+Also, uses data_magic and watir_model libs ( https://leanpub.com/cucumber_and_cheese )
 
 Wont run unless you set system environment variables for SAUCE_USERNAME and SAUCE_ACCESS_KEY
 
 ### Related Cucumber tools:
 
 https://github.com/cucumber/cucumber/wiki/Related-tools
+
+
+### I use Sublime as my IDE
+
+Key shortcuts:
+
+
+Command Palette CTRL + SHIFT + p
+File Switching CTRL + p
+Goto Symbols CTRL + r
+Multi Edit CTRL + click
+
 

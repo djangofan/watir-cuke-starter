@@ -7,8 +7,7 @@ DataMagic.load 'data_magic.yml'
 
 World(PageObject::PageFactory)
 
-require_relative '../support/pages/google_page'
-require_relative '../support/pages/guinea_pig_page'
+require_relative '../support/pages/the_internet_page'
 
 #$DEBUG = true
 
