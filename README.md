@@ -12,7 +12,9 @@ First, type :
 
 Then execute:
 
-- bundle exec rake test_cucumber
+- bundle exec rake test_cucumber_parallel
+
+- bundle exec rake test_cucumber_inline
 
 - bundle exec rake test_rspec
 

@@ -15,8 +15,8 @@ task :test_rspec do
   Rake::MultiTask[:win_10_chrome].invoke
 end
 
-task :test_cucumber do
-  ENV['TEST_RUNNER'] = 'cucumber'
+task :test_cucumber_parallel do
+  ENV['TEST_RUNNER'] = 'cucumber_parallel'
   Rake::MultiTask[:win_10_chrome].invoke
 end
 
@@ -62,7 +62,7 @@ task :win_10_chrome do
   ENV['browserName'] = 'chrome'
   ENV['version'] = 'latest'
   ENV['OUT_DIR'] = 'reports/win10_chrome'
-  ENV['BUILD_TAG'] = "watir_win10_chrome_#{Time.now.to_i}"
+  ENV['BUILD_TAG'] = "watir_win10_chrome_#{Time.now.strftime("d%m%d_t%H%M%S")}"
   Rake::Task["run_#{ENV['TEST_RUNNER']}"].execute
 end
 
