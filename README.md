@@ -1,7 +1,5 @@
 # watir-cuke-starter
 
-Inspired by https://github.com/titusfortner/Ruby-Watir-Tests/
-
 Runs tests against: http://the-internet.herokuapp.com/
 
 ### To execute:
