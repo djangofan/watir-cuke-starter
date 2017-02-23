@@ -3,5 +3,5 @@ And 'show me the test setup' do
 end
 
 And 'show me all the links on this page' do
-	 @browser.links.each { |x| puts x.href }
+    @browser.links.each { |x| puts x.href }
 end
