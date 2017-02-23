@@ -8,13 +8,13 @@ Runs tests against: http://the-internet.herokuapp.com/
 
 First, type :  
 
-    bundle install
+- bundle install
 
 Then execute:
 
-    bundle exec rake test_cucumber
+- bundle exec rake test_cucumber
 
-    bundle exec rake test_rspec
+- bundle exec rake test_rspec
 
 
 ### Notes:
