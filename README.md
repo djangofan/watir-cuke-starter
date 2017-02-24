@@ -52,6 +52,7 @@ https://github.com/cheezy/page-object/wiki/Page-Sections
 
 https://github.com/automation-wizards/ferris/wiki/4-Defining-Regions
 
+```
 class MyPage < Ferris::Core
   region(:faqs, MyFaqs) { browser.divs(id: 'faq') }
 end
@@ -79,4 +80,4 @@ page.faqs.map(&:present?).all?            # returns true if all faqs are visible
 Cool RSpec usage
 expect(page.faqs).to all(have_a_question)
 expect(page.faqs).to all(have_an_answer)
-
+```
