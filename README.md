@@ -46,3 +46,37 @@ Goto Symbols CTRL + r
 Multi Edit CTRL + click
 
 
+###  Page Sections
+
+https://github.com/cheezy/page-object/wiki/Page-Sections
+
+https://github.com/automation-wizards/ferris/wiki/4-Defining-Regions
+
+class MyPage < Ferris::Core
+  region(:faqs, MyFaqs) { browser.divs(id: 'faq') }
+end
+
+class MyFaqs < Ferris::Core
+  element(:question) { root.div(id: 'q') }
+  element(:answer) { root.button(id: 'a') }
+
+  def has_a_question?
+    question.present?
+  end
+
+  def has_an_answer?
+    question.present?
+  end
+
+end
+
+Usage
+page = MyPage.new
+page.faqs.size                            # returns number of faqs which exist in the DOM
+page.faqs.each {|faq| puts faq.question } # outputs question for each faq
+page.faqs.map(&:present?).all?            # returns true if all faqs are visible
+
+Cool RSpec usage
+expect(page.faqs).to all(have_a_question)
+expect(page.faqs).to all(have_an_answer)
+
