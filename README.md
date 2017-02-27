@@ -46,7 +46,9 @@ Goto Symbols CTRL + r
 Multi Edit CTRL + click
 
 
-###  Page Sections
+###  RESEARCH AREA
+
+This section is for TODO stuff I am still researching.
 
 https://github.com/cheezy/page-object/wiki/Page-Sections
 
@@ -81,3 +83,11 @@ Cool RSpec usage
 expect(page.faqs).to all(have_a_question)
 expect(page.faqs).to all(have_an_answer)
 ```
+
+
+capybara == Framework & DSL
+page-object == Library & DSL
+watir, selenium & watir_drops == Library & API 
+Framework has inversion of control, library is essentially helper/wrapper methods. DSL takes more magic actions, API is more explicit object oriented design
+
+
