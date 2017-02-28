@@ -3,11 +3,10 @@ require 'watir'
 require 'sauce_whisk'
 require 'page-object'
 require 'data_magic'
-DataMagic.load 'data_magic.yml'
+#DataMagic.load 'data_magic.yml'
 
 World(PageObject::PageFactory)
-
-#require_relative '../support/pages/the_internet_page'
+require_relative '../support/pages/the_internet_page'
 
 #$DEBUG = true
 
@@ -45,3 +44,4 @@ end
 at_exit { 
   print "\nReport output at: #{ENV['OUT_DIR']}\n" 
 }
+

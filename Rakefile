@@ -1,20 +1,25 @@
 require 'rspec/core/rake_task'
 require 'parallel_cucumber'
+require 'rake/clean'
 
 @success = true
-@forks = 10
+CLEAN.include("reports")
+CLEAN.include("*.log")
 
-task :test_rspec do
-  ENV['TEST_RUNNER'] = 'rspec'
-  Rake::MultiTask[:win_10_chrome].invoke
+task :check_vars do
+  variables = %w{SAUCE_USERNAME SAUCE_ACCESS_KEY}
+  missing = variables.find_all { |v| ENV[v] == nil }
+  unless missing.empty?
+    raise "\n  The following variables are missing and are needed to run this script: #{missing.join(', ')}.\n\n"
+  end
 end
 
-task :test_cucumber_parallel do
+task :test_parallel do
   ENV['TEST_RUNNER'] = 'cucumber_parallel'
   Rake::MultiTask[:win_10_chrome].invoke
 end
 
-task :test_cucumber_inline do
+task :test_inline do
   ENV['TEST_RUNNER'] = 'cucumber_inline'
   Rake::MultiTask[:win_10_chrome].invoke
 end
@@ -31,7 +36,7 @@ task :run_cucumber_parallel do
   begin
     # built-in cucumber report formatters are not thread safe
     # use https://github.com/rajatthareja/ReportBuilder
-    @result = system "parallel_cucumber features -o \"--format junit --out #{ENV['OUT_DIR']} --format pretty\" -n #{@forks}"
+    @result = system "parallel_cucumber features -o \"--format junit --out #{ENV['OUT_DIR']}/junit/ --format pretty\" -n 10"
   ensure
     @success &= @result
   end
@@ -46,16 +51,17 @@ task :run_cucumber_inline do
 end
 
 task :win_10_chrome do
+  ENV['OUT_DIR'] = 'reports/win10_chrome'
+  FileUtils.mkpath(ENV['OUT_DIR'])
+
   ENV['platform'] = 'WIN10'
   ENV['browserName'] = 'chrome'
   ENV['version'] = 'latest'
-  ENV['OUT_DIR'] = 'reports/win10_chrome'
   ENV['BUILD_TAG'] = "watir_win10_chrome_#{Time.now.strftime("d%m%d_t%H%M%S")}"
-  FileUtils.mkpath(ENV['OUT_DIR'][/^[^\/]+/])
-
   #ENV['SAUCE_USERNAME'] = 'blah'
   #ENV['SAUCE_ACCESS_KEY'] = 'key'
 
+  Rake::Task["check_vars"].execute
   Rake::Task["run_#{ENV['TEST_RUNNER']}"].execute
 end
 
