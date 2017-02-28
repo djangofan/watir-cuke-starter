@@ -40,7 +40,6 @@ After('@sauce') do |scenario|
   job.name = "Finished: #{@name}"
   SauceWhisk::Jobs.save(job)
   SauceWhisk::Jobs.change_status(session_id, scenario.passed?)
-  print "."
 end
 
 at_exit { 
