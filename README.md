@@ -8,14 +8,13 @@ First, type :
 
 - bundle install
 
+Then set ENV variables:  SAUCE_USERNAME + SAUCE_ACCESS_KEY
+
 Then execute:
 
-- bundle exec rake test_cucumber_parallel
+- bundle exec rake test_parallel
 
-- bundle exec rake test_cucumber_inline
-
-- bundle exec rake test_rspec
-
+- bundle exec rake test_inline
 
 ### Notes:
 
