@@ -3,40 +3,27 @@ require 'parallel_cucumber'
 require 'rake/clean'
 
 @success = true
-CLEAN.include("reports")
+CLEAN.include("reports/**/junit*")
+CLEAN.include("reports/**/TEST*.xml")
+CLEAN.include("reports/**/*.html")
 CLEAN.include("*.log")
-
-task :check_vars do
-  variables = %w{SAUCE_USERNAME SAUCE_ACCESS_KEY}
-  missing = variables.find_all { |v| ENV[v] == nil }
-  unless missing.empty?
-    raise "\n  The following variables are missing and are needed to run this script: #{missing.join(', ')}.\n\n"
-  end
-end
 
 task :test_parallel do
   ENV['TEST_RUNNER'] = 'cucumber_parallel'
-  Rake::MultiTask[:win_10_chrome].invoke
+  #Rake::MultiTask[:win_10_chrome].invoke
+  Rake::Task[:win_10_chrome].invoke
 end
 
 task :test_inline do
   ENV['TEST_RUNNER'] = 'cucumber_inline'
-  Rake::MultiTask[:win_10_chrome].invoke
-end
-
-task :run_rspec do
-  begin
-    @result = system "parallel_split_test spec --format d --out #{ENV['OUT_DIR']}.xml"
-  ensure
-    @success &= @result
-  end
+  Rake::Task[:win_10_chrome].invoke
 end
 
 task :run_cucumber_parallel do
   begin
     # built-in cucumber report formatters are not thread safe
     # use https://github.com/rajatthareja/ReportBuilder
-    @result = system "parallel_cucumber features -o \"--format junit --out #{ENV['OUT_DIR']}/junit/ --format pretty\" -n 10"
+    @result = system "parallel_cucumber features -o \"--format pretty --profile parallel_reports\" -n #{ENV['SAUCE_THREAD_COUNT']}"
   ensure
     @success &= @result
   end
@@ -58,10 +45,24 @@ task :win_10_chrome do
   ENV['browserName'] = 'chrome'
   ENV['version'] = 'latest'
   ENV['BUILD_TAG'] = "watir_win10_chrome_#{Time.now.strftime("d%m%d_t%H%M%S")}"
-  #ENV['SAUCE_USERNAME'] = 'blah'
-  #ENV['SAUCE_ACCESS_KEY'] = 'key'
 
-  Rake::Task["check_vars"].execute
+  Rake::Task["sauce_global_vars"].execute
   Rake::Task["run_#{ENV['TEST_RUNNER']}"].execute
 end
 
+task :sauce_global_vars do
+  ENV['SAUCE_THREAD_COUNT'] = '10'
+  ENV['SAUCE_PARENT_ACCOUNT'] = 'hs_qa'
+  ENV['SAUCE_TUNNEL_ID'] = 'lower'
+  #ENV['SAUCE_USERNAME'] = 'blah'
+  #ENV['SAUCE_ACCESS_KEY'] = 'key'
+  Rake::Task["check_missing_vars"].execute
+end
+
+task :check_missing_vars do
+  variables = %w{SAUCE_USERNAME SAUCE_ACCESS_KEY SAUCE_THREAD_COUNT SAUCE_PARENT_ACCOUNT SAUCE_TUNNEL_ID}
+  missing = variables.find_all { |v| ENV[v] == nil }
+  unless missing.empty?
+    raise "\n  The following variables are missing and are needed to run this script: #{missing.join(', ')}.\n\n"
+  end
+end

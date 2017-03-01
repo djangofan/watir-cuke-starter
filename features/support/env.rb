@@ -15,7 +15,6 @@ status.inspect
 
 Before('@sauce') do |scenario|
   grid_url = String.new("https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub")
-  tunnel_id = 'lower'
   @name = "#{scenario.feature.name} - #{scenario.name}"
 
   # i coded caps var like this because RubyMine intelli-sense liked it this way
@@ -23,8 +22,9 @@ Before('@sauce') do |scenario|
   @caps[:browserName] = ENV['browserName']
   @caps[:version] =  ENV['version']
   @caps[:platform] =  ENV['platform']
-  @caps[:name] = "Starting: #{@name}"
-  @caps[:tunnelIdentifier] = tunnel_id
+  @caps[:name] = "Running: #{@name}"
+  @caps[:tunnelIdentifier] = ENV['SAUCE_TUNNEL_ID']
+  #@caps[:parentTunnel] = ENV['SAUCE_PARENT_ACCOUNT']
   @caps[:screenResolution] = '1440x900'
   @caps[:maxDuration] = '300'
   @caps[:tags] = ['1440x900','watir']
@@ -36,7 +36,7 @@ end
 After('@sauce') do |scenario|
   session_id = @browser.wd.session_id
   job = SauceWhisk::Job.new({:id => session_id})
-  job.name = "Finished: #{@name}"
+  job.name = @name
   SauceWhisk::Jobs.save(job)
   SauceWhisk::Jobs.change_status(session_id, scenario.passed?)
 end
