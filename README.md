@@ -7,13 +7,15 @@ Runs tests against: http://the-internet.herokuapp.com/
 Install Ruby:
 
 Windows:
-https://github.com/nak1114/rbenv-win
+
+    https://github.com/nak1114/rbenv-win
 
 Linux/Mac:
-install asdf THEN
-asdf list-all ruby
-asdf install ruby 2.5.3
-asdf global ruby 2.5.3
+
+    install asdf THEN
+    asdf list-all ruby
+    asdf install ruby 2.5.3
+    asdf global ruby 2.5.3
 
 First, type :  
 
