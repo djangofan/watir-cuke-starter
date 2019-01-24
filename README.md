@@ -4,6 +4,17 @@ Runs tests against: http://the-internet.herokuapp.com/
 
 ### To execute:
 
+Install Ruby:
+
+Windows:
+https://github.com/nak1114/rbenv-win
+
+Linux/Mac:
+install asdf THEN
+asdf list-all ruby
+asdf install ruby 2.5.3
+asdf global ruby 2.5.3
+
 First, type :  
 
 - bundle install
